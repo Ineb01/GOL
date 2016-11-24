@@ -8,16 +8,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define XSIZE 3
-#define YSIZE 3
+#define XSIZE 5
+#define YSIZE 5
 
 void* PrintThread();
 void  GetNeighbours();
 void  UpdateCells();
 
-int rgMain[XSIZE][YSIZE] = {0, 0, 0,
-                            1, 1, 1,
-                            0, 0, 0};
+int rgMain[XSIZE][YSIZE] = {0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0,
+                            0, 1, 1, 1, 0,
+                            0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0,};
 
 int rgNeighbours[XSIZE][YSIZE] = {0};
 
