@@ -12,8 +12,8 @@
 #define YSIZE 3
 
 void* PrintThread();
-void  getNeighbours();
-void  updateCells();
+void  GetNeighbours();
+void  UpdateCells();
 
 int rgMain[XSIZE][YSIZE] = {0, 0, 0,
                             1, 1, 1,
@@ -28,12 +28,11 @@ int main(int argc, char** argv) {
     int result_code;
     thread_args[ 0 ] = 0;
     result_code = pthread_create(threads, NULL, PrintThread, thread_args);
-
-    getNeighbours();
-    
+        
     while(1){
-        updateCells();
-        sleep(2);
+        GetNeighbours();
+        UpdateCells();
+        sleep(1);
     }
     
     
@@ -63,9 +62,17 @@ void* PrintThread() {
     }
 }
 
-void  getNeighbours(){
+void  GetNeighbours(){
     
     int x,y;
+    
+    for(x = 0; x < XSIZE; x ++){
+        for(y = 0; y < YSIZE; y++){ 
+            
+            rgNeighbours[x][y] = 0;
+            
+        }
+    }    
     
     for(x = 0; x < XSIZE; x ++){
         for(y = 0; y < YSIZE; y++){ 
@@ -125,13 +132,13 @@ void  getNeighbours(){
     
 }
 
-void  updateCells(){
+void  UpdateCells(){
     int x,y;
     
     for(x = 0; x < XSIZE; x ++){
         for(y = 0; y < YSIZE; y++){ 
             
-            if(rgNeighbours[x][y] = 3){
+            if(rgNeighbours[x][y] == 3){
                 
                 rgMain[x][y] = 1;
                 
