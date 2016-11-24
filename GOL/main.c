@@ -28,6 +28,8 @@ int main(int argc, char** argv) {
     thread_args[ 0 ] = 0;
     result_code = pthread_create(threads, NULL, PrintThread, thread_args);
 
+    getNeighbours();
+    
     while(1){
         sleep(10);
     }
@@ -48,8 +50,15 @@ void* PrintThread() {
             }
             printf("\n");
         }
+        printf("\n");
+        for (x = 0; x < XSIZE; x++) {
+            for (y = 0; y < YSIZE; y++) {
+                printf("%d", rgNeighbours[x][y]);
+            }
+            printf("\n");
+        }
         sleep(1);
-    }    
+    }
 }
 
 void  getNeighbours(){
