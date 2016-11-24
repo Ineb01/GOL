@@ -12,10 +12,13 @@
 #define YSIZE 3
 
 void* PrintThread();
+void  getNeighbours();
 
 int rgMain[XSIZE][YSIZE] = {1, 0, 0,
                             0, 1, 0,
                             1, 0, 1};
+
+int rgNeighbours[XSIZE][YSIZE] = {0};
 
 int main(int argc, char** argv) {
 
@@ -34,6 +37,7 @@ int main(int argc, char** argv) {
 }
 
 void* PrintThread() {
+    
     int x, y;
     while (1) {
         printf("\033[%d;%dH", 0, 0);
@@ -45,5 +49,65 @@ void* PrintThread() {
             printf("\n");
         }
         sleep(1);
+    }    
+}
+
+void  getNeighbours(){
+    
+    int x,y;
+    
+    for(x = 0; x < XSIZE; x ++){
+        for(y = 0; y < YSIZE; y++)
+        
+            if(rgMain[x + 1][y] == 1){
+                
+                rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
+                
+            }
+        
+            if(rgMain[x - 1][y] == 1){
+                
+                rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
+                
+            }
+        
+            if(rgMain[x][y + 1] == 1){
+                
+                rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
+                
+            }
+        
+            if(rgMain[x][y - 1] == 1){
+                
+                rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
+                
+            }
+        
+            if(rgMain[x + 1][y + 1] == 1){
+                
+                rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
+                
+            }
+        
+            if(rgMain[x - 1][y - 1] == 1){
+                
+                rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
+                
+            }
+        
+            if(rgMain[x + 1][y - 1] == 1){
+                
+                rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
+                
+            }
+        
+            if(rgMain[x - 1][y + 1] == 1){
+                
+                rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
+                
+            }
+            
     }
+    
+    
 }
