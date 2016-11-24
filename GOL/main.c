@@ -8,9 +8,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define XSIZE
+#define YSIZE
+
+int rgMain[XSIZE][YSIZE];
+
 int main(int argc, char** argv) {
 
-    printf("Hello World");
     
     return (EXIT_SUCCESS);
 }
