@@ -59,49 +59,49 @@ void  getNeighbours(){
     for(x = 0; x < XSIZE; x ++){
         for(y = 0; y < YSIZE; y++) 
         
-            if(rgMain[x + 1 % XSIZE][y] == 1){
+            if(rgMain[(x + 1) % XSIZE][y] == 1){
                 
                 rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
                 
             }
         
-            if(rgMain[x - 1 % XSIZE][y] == 1){
+            if(rgMain[(x - 1) % XSIZE][y] == 1){
                 
                 rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
                 
             }
         
-            if(rgMain[x][y + 1 % YSIZE] == 1){
+            if(rgMain[x][(y + 1) % YSIZE] == 1){
                 
                 rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
                 
             }
         
-            if(rgMain[x][y - 1 % YSIZE] == 1){
+            if(rgMain[x][(y - 1) % YSIZE] == 1){
                 
                 rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
                 
             }
         
-            if(rgMain[x + 1 % XSIZE][y + 1 % YSIZE] == 1){
+            if(rgMain[(x + 1) % XSIZE][(y + 1) % YSIZE] == 1){
                 
                 rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
                 
             }
         
-            if(rgMain[x - 1 % XSIZE][y - 1 % YSIZE] == 1){
+            if(rgMain[(x - 1) % XSIZE][(y - 1) % YSIZE] == 1){
                 
                 rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
                 
             }
         
-            if(rgMain[x + 1 % XSIZE][y - 1 % YSIZE] == 1){
+            if(rgMain[(x + 1) % XSIZE][(y - 1) % YSIZE] == 1){
                 
                 rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
                 
             }
         
-            if(rgMain[x - 1 % XSIZE][y + 1 % YSIZE] == 1){
+            if(rgMain[(x - 1) % XSIZE][(y + 1) % YSIZE] == 1){
                 
                 rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
                 
