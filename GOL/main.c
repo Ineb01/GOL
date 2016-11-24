@@ -8,18 +8,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define XSIZE 5
-#define YSIZE 5
+#define XSIZE 7
+#define YSIZE 7
+#define SLEEP 100 * 1000
 
 void* PrintThread();
 void  GetNeighbours();
 void  UpdateCells();
 
-int rgMain[XSIZE][YSIZE] = {0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0,
-                            0, 1, 1, 1, 0,
-                            0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0,};
+int rgMain[XSIZE][YSIZE] = {0, 0, 0, 0, 0, 0, 0,
+                            0, 0, 1, 0, 0, 0, 0,
+                            0, 0, 0, 1, 0, 0, 0,
+                            0, 1, 1, 1, 0, 0, 0,
+                            0, 0, 0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0, 0, 0,};
 
 int rgNeighbours[XSIZE][YSIZE] = {0};
 
@@ -34,7 +37,7 @@ int main(int argc, char** argv) {
     while(1){
         GetNeighbours();
         UpdateCells();
-        sleep(1);
+        usleep(SLEEP);
     }
     
     
@@ -53,14 +56,17 @@ void* PrintThread() {
             }
             printf("\n");
         }
-        printf("\n");
+        
+        
+/*        printf("\n");
         for (x = 0; x < XSIZE; x++) {
             for (y = 0; y < YSIZE; y++) {
                 printf("%d", rgNeighbours[x][y]);
             }
             printf("\n");
         }
-        sleep(1);
+        usleep(SLEEP); 
+ */
     }
 }
 
