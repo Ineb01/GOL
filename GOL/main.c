@@ -13,10 +13,11 @@
 
 void* PrintThread();
 void  getNeighbours();
+void  updateCells();
 
-int rgMain[XSIZE][YSIZE] = {1, 0, 0,
-                            0, 1, 0,
-                            1, 0, 1};
+int rgMain[XSIZE][YSIZE] = {0, 0, 0,
+                            1, 1, 1,
+                            0, 0, 0};
 
 int rgNeighbours[XSIZE][YSIZE] = {0};
 
@@ -31,7 +32,8 @@ int main(int argc, char** argv) {
     getNeighbours();
     
     while(1){
-        sleep(10);
+        updateCells();
+        sleep(2);
     }
     
     
@@ -121,4 +123,31 @@ void  getNeighbours(){
     }
     
     
+}
+
+void  updateCells(){
+    int x,y;
+    
+    for(x = 0; x < XSIZE; x ++){
+        for(y = 0; y < YSIZE; y++){ 
+            
+            if(rgNeighbours[x][y] = 3){
+                
+                rgMain[x][y] = 1;
+                
+            }
+            
+            if(rgNeighbours[x][y] < 2){
+                
+                rgMain[x][y] = 0;
+                
+            }
+            
+            if(rgNeighbours[x][y] > 3){
+                
+                rgMain[x][y] = 0;
+                
+            }            
+        }
+    }    
 }
