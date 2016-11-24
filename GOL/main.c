@@ -33,7 +33,9 @@ int main(int argc, char** argv) {
     int result_code;
     thread_args[ 0 ] = 0;
     result_code = pthread_create(threads, NULL, PrintThread, thread_args);
-        
+    
+    printf("\e[?25l");
+    
     while(1){
         GetNeighbours();
         UpdateCells();
