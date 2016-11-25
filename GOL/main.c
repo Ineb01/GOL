@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
         }
     }
                 
-        
+    fclose(fp); 
     
     printf("\e[?25l");
    
