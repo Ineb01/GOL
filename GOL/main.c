@@ -208,12 +208,14 @@ void UpdateCells() {
                     }
                 }
             }
+            break;
         case 1:
             for (x = 0; x < xsize; x++) {
                 for (y = 0; y < ysize; y++) {
                     rgMain[x][y] = rgNeighbours[x][y]%2;
                 }
             }
+            break;
     }
 }
 
