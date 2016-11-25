@@ -112,7 +112,7 @@ void* PrintThread() {
 void GetNeighbours() {
 
     int x, y;
-
+    
     for (x = 0; x < xsize; x++) {
         for (y = 0; y < ysize; y++) {
 
@@ -183,28 +183,37 @@ void UpdateCells() {
     int x, y;
 
     GetNeighbours();
+    
+    switch(mode){
+        case 0:
+            for (x = 0; x < xsize; x++) {
+                for (y = 0; y < ysize; y++) {
 
-    for (x = 0; x < xsize; x++) {
-        for (y = 0; y < ysize; y++) {
+                    if (rgNeighbours[x][y] == 3) {
 
-            if (rgNeighbours[x][y] == 3) {
+                        rgMain[x][y] = 1;
 
-                rgMain[x][y] = 1;
+                    }
 
+                    if (rgNeighbours[x][y] < 2) {
+
+                        rgMain[x][y] = 0;
+
+                    }
+
+                    if (rgNeighbours[x][y] > 3) {
+
+                        rgMain[x][y] = 0;
+
+                    }
+                }
             }
-
-            if (rgNeighbours[x][y] < 2) {
-
-                rgMain[x][y] = 0;
-
+        case 1:
+            for (x = 0; x < xsize; x++) {
+                for (y = 0; y < ysize; y++) {
+                    rgMain[x][y] = rgNeighbours[x][y]%2;
+                }
             }
-
-            if (rgNeighbours[x][y] > 3) {
-
-                rgMain[x][y] = 0;
-
-            }
-        }
     }
 }
 
