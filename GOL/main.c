@@ -36,18 +36,18 @@ int main(int argc, char** argv) {
     FILE *fp;
     
     fp = fopen("Pattern.txt", "r");
-
-    fscanf(fp, "%d", &temp);
     
     while(i){
-    
+        
+        fscanf(fp, "%c", &temp);
+        
         switch(temp){
 
-            case('S'):  fscanf(fp, "%d", &xsize);
+            case'S':  fscanf(fp, "%d", &xsize);
                         fscanf(fp, "%d", &ysize);
                         break;
 
-            case('P'):  for(x=0;x<xsize;x++){
+            case'P':  for(x=0;x<xsize;x++){
                             for(y=0;y<ysize;y++){
                                 fscanf(fp, "%d", &rgMain[x][y]);
                             }
@@ -55,14 +55,14 @@ int main(int argc, char** argv) {
             
                         break;
 
-            case('D'):  fscanf(fp, "%d", &sleep);
+            case'D':  fscanf(fp, "%d", &sleep);
                         sleep = sleep * 1000;
                         break;
 
-            case('M'):  fscanf(fp, "%d", &mode);
+            case'M':  fscanf(fp, "%d", &mode);
                         break;
 
-            default:    i = 0; 
+            case';':    i = 0; 
                         break;    
 
         }    
