@@ -1,6 +1,6 @@
 /* 
  * File:   main.c
- * Author: Benjamin Bachmayr
+ * Author: Benjamin Bachmayr & Tobias Wiedermann
  *
  * Created on 24. November 2016, 20:18
  */
