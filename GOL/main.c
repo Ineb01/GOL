@@ -73,8 +73,8 @@ int main(int argc, char** argv) {
     printf("\e[?25l");
 
     while (1) {
-        UpdateCells();
         usleep(sleep);
+        UpdateCells();
     }
 
 
