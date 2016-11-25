@@ -90,45 +90,13 @@ void* PrintThread() {
     while (1) {
         printf("\033[%d;%dH", 0, 0);
 
-        printf(" ");
-
-        for (i = 0; i < xsize; i++) {
-
-            printf("_");
-
-        }
-
-        printf("\n|");
-
         for (x = 0; x < xsize; x++) {
             for (y = 0; y < ysize; y++) {
                 if (rgMain[x][y])printf("#");
                 else printf(" ");
             }
-
-            if (x != xsize - 1) {
-
-                printf("|\n|");
-
-            } else {
-
-                printf("|\n");
-
-            }
-
+            printf("\n");
         }
-
-        printf("|");
-
-        for (i = 0; i < xsize; i++) {
-
-            printf("_");
-
-        }
-
-        printf("|");
-
-
         /*        printf("\n");
                 for (x = 0; x < xsize; x++) {
                     for (y = 0; y < ysize; y++) {
