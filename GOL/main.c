@@ -10,27 +10,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define XSIZE 7
-#define YSIZE 7
-#define SLEEP 100 * 1000
-
 void* PrintThread();
 void  GetNeighbours();
 void  UpdateCells();
+int xsize = 3;
+int ysize = 3;
+int sleep = 100;
+int mode = 0;
 
-int rgMain[XSIZE][YSIZE] = {0, 0, 1, 0, 0, 0, 0,
-                            0, 0, 0, 1, 0, 0, 0,
-                            0, 1, 1, 1, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0};
+int rgMain[100][100] = {0};
 
-int rgNeighbours[XSIZE][YSIZE] = {0};
+int rgNeighbours[100][100] = {0};
 
 int main(int argc, char** argv) {
 
     int x, y;
+    int i = 1;
+    char temp;
     
     pthread_t threads[ 1 ];
     int thread_args[ 1 ];
@@ -41,10 +37,36 @@ int main(int argc, char** argv) {
     
     fp = fopen("Pattern.txt", "r");
 
-    for(x=0;x<XSIZE;x++){
-        for(y=0;y<YSIZE;y++){
-            fscanf(fp, "%d", &rgMain[x][y]);
-        }
+    fscanf(fp, "%d", &temp);
+    
+    while(i){
+    
+        switch(temp){
+
+            case('S'):  fscanf(fp, "%d", &xsize);
+                        fscanf(fp, "%d", &ysize);
+                        break;
+
+            case('P'):  for(x=0;x<xsize;x++){
+                            for(y=0;y<ysize;y++){
+                                fscanf(fp, "%d", &rgMain[x][y]);
+                            }
+                        }  
+            
+                        break;
+
+            case('D'):  fscanf(fp, "%d", &sleep);
+                        sleep = sleep * 1000;
+                        break;
+
+            case('M'):  fscanf(fp, "%d", &mode);
+                        break;
+
+            default:    i = 0; 
+                        break;    
+
+        }    
+    
     }
                 
     fclose(fp); 
@@ -52,9 +74,8 @@ int main(int argc, char** argv) {
     printf("\e[?25l");
    
     while(1){
-        GetNeighbours();
         UpdateCells();
-        usleep(SLEEP);
+        usleep(sleep);
     }
    
    
@@ -72,7 +93,7 @@ void* PrintThread() {
         
         printf(" ");
     
-        for(i = 0; i < XSIZE; i++){
+        for(i = 0; i < xsize; i++){
         
             printf("_");
         
@@ -80,13 +101,13 @@ void* PrintThread() {
     
         printf("\n|");
         
-        for (x = 0; x < XSIZE; x++) {
-            for (y = 0; y < YSIZE; y++) {
+        for (x = 0; x < xsize; x++) {
+            for (y = 0; y < ysize; y++) {
                 if (rgMain[x][y])printf("#");
                 else printf(" ");
             }
             
-            if(x != XSIZE - 1){
+            if(x != xsize - 1){
                 
                 printf("|\n|");
                 
@@ -100,7 +121,7 @@ void* PrintThread() {
         
         printf("|");
     
-        for(i = 0; i < XSIZE; i++){
+        for(i = 0; i < xsize; i++){
         
             printf("_");
         
@@ -110,13 +131,13 @@ void* PrintThread() {
        
        
 /*        printf("\n");
-        for (x = 0; x < XSIZE; x++) {
-            for (y = 0; y < YSIZE; y++) {
+        for (x = 0; x < xsize; x++) {
+            for (y = 0; y < ysize; y++) {
                 printf("%d", rgNeighbours[x][y]);
             }
             printf("\n");
         }
-        usleep(SLEEP); komplexe zahlen statistische fehler
+        usleep(sleep); komplexe zahlen statistische fehler
  */
     }
 }
@@ -125,60 +146,60 @@ void  GetNeighbours(){
    
     int x,y;
    
-    for(x = 0; x < XSIZE; x ++){
-        for(y = 0; y < YSIZE; y++){
+    for(x = 0; x < xsize; x ++){
+        for(y = 0; y < ysize; y++){
            
             rgNeighbours[x][y] = 0;
            
         }
     }   
    
-    for(x = 0; x < XSIZE; x ++){
-        for(y = 0; y < YSIZE; y++){
+    for(x = 0; x < xsize; x ++){
+        for(y = 0; y < ysize; y++){
        
-            if(rgMain[(x + 1) % XSIZE][y] == 1){
+            if(rgMain[(x + 1) % xsize][y] == 1){
                
                 rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
                
             }
        
-            if(rgMain[(x - 1 + XSIZE) % XSIZE][y] == 1){
+            if(rgMain[(x - 1 + xsize) % xsize][y] == 1){
                
                 rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
                
             }
        
-            if(rgMain[x][(y + 1) % YSIZE] == 1){
+            if(rgMain[x][(y + 1) % ysize] == 1){
                
                 rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
                
             }
        
-            if(rgMain[x][(y - 1 + YSIZE) % YSIZE] == 1){
+            if(rgMain[x][(y - 1 + ysize) % ysize] == 1){
                
                 rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
                
             }
        
-            if(rgMain[(x + 1) % XSIZE][(y + 1) % YSIZE] == 1){
+            if(rgMain[(x + 1) % xsize][(y + 1) % ysize] == 1){
                
                 rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
                
             }
        
-            if(rgMain[(x - 1 + XSIZE) % XSIZE][(y - 1 + YSIZE) % YSIZE] == 1){
+            if(rgMain[(x - 1 + xsize) % xsize][(y - 1 + ysize) % ysize] == 1){
                
                 rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
                
             }
        
-            if(rgMain[(x + 1) % XSIZE][(y - 1 + YSIZE) % YSIZE] == 1){
+            if(rgMain[(x + 1) % xsize][(y - 1 + ysize) % ysize] == 1){
                
                 rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
                
             }
        
-            if(rgMain[(x - 1 + XSIZE) % XSIZE][(y + 1) % YSIZE] == 1){
+            if(rgMain[(x - 1 + xsize) % xsize][(y + 1) % ysize] == 1){
                
                 rgNeighbours[x][y] = rgNeighbours[x][y] + 1;
                
@@ -193,9 +214,11 @@ void  GetNeighbours(){
 
 void  UpdateCells(){
     int x,y;
-   
-    for(x = 0; x < XSIZE; x ++){
-        for(y = 0; y < YSIZE; y++){
+    
+    GetNeighbours();
+    
+    for(x = 0; x < xsize; x ++){
+        for(y = 0; y < ysize; y++){
            
             if(rgNeighbours[x][y] == 3){
                
