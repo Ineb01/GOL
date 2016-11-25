@@ -30,12 +30,25 @@ int rgNeighbours[XSIZE][YSIZE] = {0};
 
 int main(int argc, char** argv) {
 
+    int x, y;
+    
     pthread_t threads[ 1 ];
     int thread_args[ 1 ];
     int result_code;
     thread_args[ 0 ] = 0;
     result_code = pthread_create(threads, NULL, PrintThread, thread_args);
-   
+    FILE *fp;
+    
+    fp = fopen("Pattern.txt", "r");
+
+    for(x=0;x<XSIZE;x++){
+        for(y=0;y<YSIZE;y++){
+            fscanf(fp, "%d", &rgMain[x][y]);
+        }
+    }
+                
+        
+    
     printf("\e[?25l");
    
     while(1){
