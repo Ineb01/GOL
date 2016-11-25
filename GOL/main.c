@@ -57,15 +57,15 @@ void* PrintThread() {
     while (1) {
         printf("\033[%d;%dH", 0, 0);
         
-        printf("â");
+        printf(" ");
     
         for(i = 0; i < XSIZE; i++){
         
-            printf("â");
+            printf("_");
         
         }
     
-        printf("â\n|");
+        printf("\n|");
         
         for (x = 0; x < XSIZE; x++) {
             for (y = 0; y < YSIZE; y++) {
@@ -75,25 +75,25 @@ void* PrintThread() {
             
             if(x != XSIZE - 1){
                 
-                printf("â\nâ");
+                printf("|\n|");
                 
             }else{
                 
-                printf("â\n");
+                printf("|\n");
                 
             }
             
         }
         
-        printf("â");
+        printf("|");
     
         for(i = 0; i < XSIZE; i++){
         
-            printf("â");
+            printf("_");
         
         }
     
-        printf("â");
+        printf("|");
        
        
 /*        printf("\n");
